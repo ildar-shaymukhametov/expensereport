@@ -108,6 +108,7 @@ The ExpenseReport example currently exists in the following languages:
 
 Currently, solutions exist in the following languages:
 - [C](expensereport-c/)
+- [C#](expensereport-csharp/)
 - [C++](expensereport-cxx/)
 - [Fortran](expensereport-fortran/)
 - [Go](expensereport-go/) (with BDD)
