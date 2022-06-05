@@ -107,6 +107,7 @@ The ExpenseReport example currently exists in the following languages:
 **Warning** The solutions branch will be rebased!
 
 Currently, solutions exist in the following languages:
+- [Assembler](expensereport-asm-68k-masm/) (Motorola 68020, Amiga OS, MaxonASM)
 - [C](expensereport-c/)
 - [C#](expensereport-csharp/)
 - [C++](expensereport-cxx/)
