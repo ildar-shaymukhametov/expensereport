@@ -19,17 +19,11 @@ namespace expensereport_csharp
         public void PrintReport(List<Expense> expenses)
         {
             int total = 0;
-            int mealExpenses = 0;
 
             Console.WriteLine("Expenses " + DateTime.Now);
-            
+
             foreach (Expense expense in expenses)
             {
-                if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
-                {
-                    mealExpenses += expense.amount;
-                }
-
                 var expenseName = GetExpanseName(expense);
                 var mealOverExpensesMarker = GetMarker(expense);
 
@@ -38,6 +32,14 @@ namespace expensereport_csharp
                 total += expense.amount;
             }
 
+            int mealExpenses = 0;
+            foreach (Expense expense in expenses)
+            {
+                if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
+                {
+                    mealExpenses += expense.amount;
+                }
+            }
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
         }
