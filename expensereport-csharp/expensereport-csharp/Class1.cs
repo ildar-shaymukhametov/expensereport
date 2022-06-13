@@ -46,16 +46,8 @@ namespace expensereport_csharp
         
         public int CalculateMealExpenses()
         {
-            int result = 0;
-            foreach (var expense in this)
-            {
-                if (expense is DinnerExpense || expense is BreakfastExpense)
-                {
-                    result += expense.amount;
-                }
-            }
-
-            return result;
+            var mealTypes = new [] { typeof(DinnerExpense), typeof(BreakfastExpense) };
+            return this.Where(x => mealTypes.Contains(x.GetType())).Sum(x => x.amount);
         }
 
         public int CalculateTotal()
