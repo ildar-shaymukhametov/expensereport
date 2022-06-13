@@ -8,35 +8,22 @@ namespace expensereport_csharp
     {
         public abstract string name { get; }
         public virtual bool IsMeal { get; }
-
+        public virtual bool IsOverLimit { get; }
         public int amount;
-
-        public virtual string GetMarker()
-        {
-            return " ";
-        }
     }
 
     public class DinnerExpense : Expense
     {
         public override string name => "Dinner";
         public override bool IsMeal => true;
-
-        public override string GetMarker()
-        {
-            return amount > 5000 ? "X" : base.GetMarker();
-        }
+        public override bool IsOverLimit => amount > 5000;
     }
 
     public class BreakfastExpense : Expense
     {
         public override string name => "Breakfast";
         public override bool IsMeal => true;
-
-        public override string GetMarker()
-        {
-            return amount > 1000 ? "X" : base.GetMarker();
-        }
+        public override bool IsOverLimit => amount > 1000;
     }
 
     public class CarRentalExpense : Expense
@@ -68,7 +55,12 @@ namespace expensereport_csharp
 
         private static string GenerateRow(Expense expense)
         {
-            return expense.name + "\t" + expense.amount + "\t" + expense.GetMarker();
+            return expense.name + "\t" + expense.amount + "\t" + GetMarker(expense);
+        }
+
+        private static string GetMarker(Expense expense)
+        {
+            return expense.IsOverLimit ? "X" : " ";
         }
 
         private static void PrintFooter(List<Expense> expenses)
