@@ -21,6 +21,7 @@ namespace expensereport_csharp
 
         public static Expense Dinner => new("Dinner", true, 5000);
         public static Expense Breakfast => new("Breakfast", true, 1000);
+        public static Expense Lunch => new("Lunch", true, 2000);
         public static Expense CarRental => new("Car Rental");
     }
 
