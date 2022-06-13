@@ -7,6 +7,8 @@ namespace expensereport_csharp
     public abstract class Expense
     {
         public abstract string name { get; }
+        public virtual bool IsMeal { get; }
+
         public int amount;
 
         public virtual string GetMarker()
@@ -18,6 +20,7 @@ namespace expensereport_csharp
     public class DinnerExpense : Expense
     {
         public override string name => "Dinner";
+        public override bool IsMeal => true;
 
         public override string GetMarker()
         {
@@ -28,6 +31,7 @@ namespace expensereport_csharp
     public class BreakfastExpense : Expense
     {
         public override string name => "Breakfast";
+        public override bool IsMeal => true;
 
         public override string GetMarker()
         {
@@ -46,8 +50,7 @@ namespace expensereport_csharp
         
         public int CalculateMealExpenses()
         {
-            var mealTypes = new [] { typeof(DinnerExpense), typeof(BreakfastExpense) };
-            return this.Where(x => mealTypes.Contains(x.GetType())).Sum(x => x.amount);
+            return this.Where(x => x.IsMeal).Sum(x => x.amount);
         }
 
         public int CalculateTotal()
