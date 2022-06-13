@@ -18,8 +18,6 @@ namespace expensereport_csharp
     {
         public void PrintReport(List<Expense> expenses)
         {
-            int total = 0;
-
             Console.WriteLine("Expenses " + DateTime.Now);
 
             foreach (Expense expense in expenses)
@@ -28,12 +26,16 @@ namespace expensereport_csharp
                 var mealOverExpensesMarker = GetMarker(expense);
 
                 Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-
-                total += expense.amount;
             }
 
             var mealExpenses = CalculateMealExpenses(expenses);
             Console.WriteLine("Meal expenses: " + mealExpenses);
+
+            int total = 0;
+            foreach (Expense expense in expenses)
+            {
+                total += expense.amount;
+            }
             Console.WriteLine("Total expenses: " + total);
         }
 
