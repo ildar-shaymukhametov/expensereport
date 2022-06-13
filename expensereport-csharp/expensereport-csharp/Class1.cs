@@ -43,25 +43,10 @@ namespace expensereport_csharp
     {
         public override string name => "CarRental";
     }
-    
-    public class Expenses : List<Expense>
-    {
-        public Expenses(List<Expense> expenses) : base(expenses) {}
-        
-        public int CalculateMealExpenses()
-        {
-            return this.Where(x => x.IsMeal).Sum(x => x.amount);
-        }
-
-        public int CalculateTotal()
-        {
-            return this.Sum(x => x.amount);
-        }
-    }
 
     public class ExpenseReport
     {
-        public void PrintReport(Expenses expenses)
+        public void PrintReport(List<Expense> expenses)
         {
             PrintHeader();
             PrintBody(expenses);
@@ -73,7 +58,7 @@ namespace expensereport_csharp
             Console.WriteLine("Expenses " + DateTime.Now);
         }
 
-        private static void PrintBody(Expenses expenses)
+        private static void PrintBody(List<Expense> expenses)
         {
             foreach (Expense expense in expenses)
             {
@@ -81,10 +66,20 @@ namespace expensereport_csharp
             }
         }
 
-        private static void PrintFooter(Expenses expenses)
+        private static void PrintFooter(List<Expense> expenses)
         {
-            Console.WriteLine("Meal expenses: " + expenses.CalculateMealExpenses());
-            Console.WriteLine("Total expenses: " + expenses.CalculateTotal());
+            Console.WriteLine("Meal expenses: " + CalculateMealExpenses(expenses));
+            Console.WriteLine("Total expenses: " + CalculateTotal(expenses));
+        }
+
+        private static int CalculateMealExpenses(List<Expense> expenses)
+        {
+            return expenses.Where(x => x.IsMeal).Sum(x => x.amount);
+        }
+
+        private static int CalculateTotal(List<Expense> expenses)
+        {
+            return expenses.Sum(x => x.amount);
         }
     }
 }
