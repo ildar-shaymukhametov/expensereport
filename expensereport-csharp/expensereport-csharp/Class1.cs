@@ -44,40 +44,15 @@ namespace expensereport_csharp
     {
         public override string name => "CarRental";
     }
-
-    public class ExpenseReport
+    
+    public class Expenses : List<Expense>
     {
-        public void PrintReport(List<Expense> expenses)
-        {
-            Console.WriteLine("Expenses " + DateTime.Now);
-
-            foreach (Expense expense in expenses)
-            {
-                Console.WriteLine(expense.name + "\t" + expense.amount + "\t" + expense.GetMarker());
-            }
-
-            var mealExpenses = CalculateMealExpenses(expenses);
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-
-            int total = CalculateTotal(expenses);
-            Console.WriteLine("Total expenses: " + total);
-        }
-
-        private static int CalculateTotal(List<Expense> expenses)
-        {
-            int total = 0;
-            foreach (Expense expense in expenses)
-            {
-                total += expense.amount;
-            }
-
-            return total;
-        }
-
-        private static int CalculateMealExpenses(List<Expense> expenses)
+        public Expenses(List<Expense> expenses) : base(expenses) {}
+        
+        public int CalculateMealExpenses()
         {
             int result = 0;
-            foreach (Expense expense in expenses)
+            foreach (var expense in this)
             {
                 if (expense is DinnerExpense || expense is BreakfastExpense)
                 {
@@ -86,6 +61,36 @@ namespace expensereport_csharp
             }
 
             return result;
+        }
+
+        public int CalculateTotal()
+        {
+            int total = 0;
+            foreach (Expense expense in this)
+            {
+                total += expense.amount;
+            }
+
+            return total;
+        }
+    }
+
+    public class ExpenseReport
+    {
+        public void PrintReport(Expenses expenses)
+        {
+            Console.WriteLine("Expenses " + DateTime.Now);
+
+            foreach (Expense expense in expenses)
+            {
+                Console.WriteLine(expense.name + "\t" + expense.amount + "\t" + expense.GetMarker());
+            }
+
+            var mealExpenses = expenses.CalculateMealExpenses();
+            Console.WriteLine("Meal expenses: " + mealExpenses);
+
+            int total = expenses.CalculateTotal();
+            Console.WriteLine("Total expenses: " + total);
         }
     }
 }
