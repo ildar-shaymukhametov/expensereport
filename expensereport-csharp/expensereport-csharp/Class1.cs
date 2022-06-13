@@ -3,15 +3,9 @@ using System.Collections.Generic;
 
 namespace expensereport_csharp
 {
-    public enum ExpenseType
-    {
-        DINNER, BREAKFAST, CAR_RENTAL
-    }
-
     public abstract class Expense
     {
         public abstract string name { get; }
-        public ExpenseType type;
         public int amount;
 
         public virtual string GetMarker()
