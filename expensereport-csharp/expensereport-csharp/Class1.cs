@@ -73,13 +73,26 @@ namespace expensereport_csharp
     {
         public void PrintReport(Expenses expenses)
         {
-            Console.WriteLine("Expenses " + DateTime.Now);
+            PrintHeader();
+            PrintBody(expenses);
+            PrintFooter(expenses);
+        }
 
+        private static void PrintHeader()
+        {
+            Console.WriteLine("Expenses " + DateTime.Now);
+        }
+
+        private static void PrintBody(Expenses expenses)
+        {
             foreach (Expense expense in expenses)
             {
                 Console.WriteLine(expense.name + "\t" + expense.amount + "\t" + expense.GetMarker());
             }
+        }
 
+        private static void PrintFooter(Expenses expenses)
+        {
             Console.WriteLine("Meal expenses: " + expenses.CalculateMealExpenses());
             Console.WriteLine("Total expenses: " + expenses.CalculateTotal());
         }
