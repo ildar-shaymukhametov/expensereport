@@ -31,12 +31,7 @@ namespace expensereport_csharp
                 }
 
                 var expenseName = GetExpanseName(expense);
-
-                String mealOverExpensesMarker =
-                    expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
-                    expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
-                        ? "X"
-                        : " ";
+                var mealOverExpensesMarker = GetMarker(expense);
 
                 Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
@@ -45,6 +40,11 @@ namespace expensereport_csharp
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
+        }
+
+        private static string GetMarker(Expense expense)
+        {
+            return expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X": " ";
         }
 
         private static string GetExpanseName(Expense expense)
