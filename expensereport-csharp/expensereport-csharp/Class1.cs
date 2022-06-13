@@ -62,8 +62,13 @@ namespace expensereport_csharp
         {
             foreach (Expense expense in expenses)
             {
-                Console.WriteLine(expense.name + "\t" + expense.amount + "\t" + expense.GetMarker());
+                Console.WriteLine(GenerateRow(expense));
             }
+        }
+
+        private static string GenerateRow(Expense expense)
+        {
+            return expense.name + "\t" + expense.amount + "\t" + expense.GetMarker();
         }
 
         private static void PrintFooter(List<Expense> expenses)
