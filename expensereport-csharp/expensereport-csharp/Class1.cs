@@ -4,31 +4,24 @@ using System.Linq;
 
 namespace expensereport_csharp
 {
-    public abstract class Expense
+    public class Expense
     {
-        public abstract string name { get; }
-        public virtual bool IsMeal { get; }
-        public virtual bool IsOverLimit { get; }
+        public string name { get; }
+        public bool IsMeal { get; }
+        public bool IsOverLimit { get; }
         public int amount;
-    }
+        private readonly int limit;
 
-    public class DinnerExpense : Expense
-    {
-        public override string name => "Dinner";
-        public override bool IsMeal => true;
-        public override bool IsOverLimit => amount > 5000;
-    }
+        public Expense(string name, bool isMeal = false, int limit = int.MaxValue)
+        {
+            this.limit = limit;
+            this.IsMeal = isMeal;
+            this.name = name;
+        }
 
-    public class BreakfastExpense : Expense
-    {
-        public override string name => "Breakfast";
-        public override bool IsMeal => true;
-        public override bool IsOverLimit => amount > 1000;
-    }
-
-    public class CarRentalExpense : Expense
-    {
-        public override string name => "CarRental";
+        public static Expense Dinner => new("Dinner", true, 5000);
+        public static Expense Breakfast => new("Breakfast", true, 1000);
+        public static Expense CarRental => new("Car Rental");
     }
 
     public class ExpenseReport
