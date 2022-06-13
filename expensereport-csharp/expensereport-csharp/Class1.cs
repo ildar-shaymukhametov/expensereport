@@ -23,7 +23,7 @@ namespace expensereport_csharp
             foreach (Expense expense in expenses)
             {
                 var expenseName = GetExpanseName(expense);
-                var expanseMarker = GetMarker(expense);
+                var expanseMarker = GetExpanseMarker(expense);
 
                 Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + expanseMarker);
             }
@@ -60,7 +60,7 @@ namespace expensereport_csharp
             return result;
         }
 
-        private static string GetMarker(Expense expense)
+        private static string GetExpanseMarker(Expense expense)
         {
             return expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X": " ";
         }
