@@ -23,9 +23,9 @@ namespace expensereport_csharp
             foreach (Expense expense in expenses)
             {
                 var expenseName = GetExpanseName(expense);
-                var mealOverExpensesMarker = GetMarker(expense);
+                var expanseMarker = GetMarker(expense);
 
-                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + expanseMarker);
             }
 
             var mealExpenses = CalculateMealExpenses(expenses);
