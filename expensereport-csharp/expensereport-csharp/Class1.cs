@@ -31,12 +31,19 @@ namespace expensereport_csharp
             var mealExpenses = CalculateMealExpenses(expenses);
             Console.WriteLine("Meal expenses: " + mealExpenses);
 
+            int total = CalculateTotal(expenses);
+            Console.WriteLine("Total expenses: " + total);
+        }
+
+        private static int CalculateTotal(List<Expense> expenses)
+        {
             int total = 0;
             foreach (Expense expense in expenses)
             {
                 total += expense.amount;
             }
-            Console.WriteLine("Total expenses: " + total);
+
+            return total;
         }
 
         private static int CalculateMealExpenses(List<Expense> expenses)
