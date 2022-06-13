@@ -32,16 +32,23 @@ namespace expensereport_csharp
                 total += expense.amount;
             }
 
-            int mealExpenses = 0;
+            var mealExpenses = CalculateMealExpenses(expenses);
+            Console.WriteLine("Meal expenses: " + mealExpenses);
+            Console.WriteLine("Total expenses: " + total);
+        }
+
+        private static int CalculateMealExpenses(List<Expense> expenses)
+        {
+            int result = 0;
             foreach (Expense expense in expenses)
             {
                 if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
                 {
-                    mealExpenses += expense.amount;
+                    result += expense.amount;
                 }
             }
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-            Console.WriteLine("Total expenses: " + total);
+
+            return result;
         }
 
         private static string GetMarker(Expense expense)
