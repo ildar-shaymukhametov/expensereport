@@ -80,11 +80,8 @@ namespace expensereport_csharp
                 Console.WriteLine(expense.name + "\t" + expense.amount + "\t" + expense.GetMarker());
             }
 
-            var mealExpenses = expenses.CalculateMealExpenses();
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-
-            int total = expenses.CalculateTotal();
-            Console.WriteLine("Total expenses: " + total);
+            Console.WriteLine("Meal expenses: " + expenses.CalculateMealExpenses());
+            Console.WriteLine("Total expenses: " + expenses.CalculateTotal());
         }
     }
 }
