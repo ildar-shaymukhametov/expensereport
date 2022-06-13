@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -59,13 +60,7 @@ namespace expensereport_csharp
 
         public int CalculateTotal()
         {
-            int total = 0;
-            foreach (Expense expense in this)
-            {
-                total += expense.amount;
-            }
-
-            return total;
+            return this.Sum(x => x.amount);
         }
     }
 
